@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Mock Exam Platform</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>🎯 AI Exam Prep</h2>
+            </div>
+            <div class="nav-links">
+                <button class="nav-link" onclick="showSection('home')">Home</button>
+                <button class="nav-link" onclick="showSection('create-exam')">Create Exam</button>
+                <button class="nav-link" onclick="showSection('question-bank')">Question Bank</button>
+                <button class="nav-link" onclick="showSection('analytics')">Analytics</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <section id="home" class="section active">
+        <div class="container">
+            <div class="hero">
+                <h1>AI-Powered Mock Exam Platform</h1>
+                <p class="hero-subtitle">Prepare for IIT-JEE, NEET, and UPSC with intelligent exam creation and personalized analytics</p>
+            </div>
+
+            <div class="exam-cards">
+                <div class="exam-card" onclick="selectExamType('IIT_JEE')">
+                    <div class="exam-card-header">
+                        <h3>IIT-JEE</h3>
+                        <span class="status status--info">Engineering</span>
+                    </div>
+                    <div class="exam-card-body">
+                        <p>Indian Institute of Technology Joint Entrance Examination</p>
+                        <div class="exam-meta">
+                            <span>📚 Physics, Chemistry, Mathematics</span>
+                            <span>⏱️ 180 minutes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="exam-card" onclick="selectExamType('NEET')">
+                    <div class="exam-card-header">
+                        <h3>NEET</h3>
+                        <span class="status status--success">Medical</span>
+                    </div>
+                    <div class="exam-card-body">
+                        <p>National Eligibility cum Entrance Test</p>
+                        <div class="exam-meta">
+                            <span>📚 Physics, Chemistry, Biology</span>
+                            <span>⏱️ 180 minutes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="exam-card" onclick="selectExamType('UPSC')">
+                    <div class="exam-card-header">
+                        <h3>UPSC</h3>
+                        <span class="status status--warning">Civil Services</span>
+                    </div>
+                    <div class="exam-card-body">
+                        <p>Union Public Service Commission Exam</p>
+                        <div class="exam-meta">
+                            <span>📚 History, Geography, Polity</span>
+                            <span>⏱️ 120 minutes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Create Exam Section -->
+    <section id="create-exam" class="section">
+        <div class="container">
+            <h2>Create Your Mock Exam</h2>
+            <form id="createExamForm">
+                <label for="examType">Select Exam Type:</label>
+                <select id="examType" name="examType" onchange="loadSubjects(this.value)" required>
+                    <option value="">Choose...</option>
+                    <option value="IIT_JEE">IIT-JEE</option>
+                    <option value="NEET">NEET</option>
+                    <option value="UPSC">UPSC</option>
+                </select>
+
+                <div id="subjectSelection" style="margin-top: 10px;"></div>
+
+                <label for="difficultyLevel">Difficulty Level:</label>
+                <select id="difficultyLevel" name="difficultyLevel" required>
+                    <option value="mixed">Mixed</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <label for="numQuestions">Number of Questions:</label>
+                <select id="numQuestions" name="numQuestions" required>
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                </select>
+
+                <label for="examDuration">Time Duration (minutes):</label>
+                <input type="number" id="examDuration" name="examDuration" value="30" min="10" max="180" required />
+
+                <button type="submit">Generate Exam</button>
+            </form>
+
+            <div id="examPreview" style="margin-top: 20px;"></div>
+        </div>
+    </section>
+
+    <!-- Question Bank Section -->
+    <section id="question-bank" class="section">
+        <div class="container">
+            <h2>Question Bank</h2>
+            <input type="text" id="questionSearch" placeholder="Search questions..." oninput="filterQuestions()" />
+            <div id="questionList"></div>
+        </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section id="analytics" class="section">
+        <div class="container">
+            <h2>Performance Analytics</h2>
+            <canvas id="performanceChart"></canvas>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
